@@ -1,37 +1,41 @@
 <template>
     <div>
-        <h1>Posts</h1>
-        <div v-for="post in posts" :key="post.id">
-            <h3>{{post.title}}</h3>
-            <p>{{post.body}}</p>
+        <h1>Borrowers</h1>
+        <div v-for="borrower in borrowers" :key="borrower.IDNumber">
+            <h3>{{borrower.lastname}}, {{borrower.firstname}}</h3>
+            <p>{{borrower.IDNumber}}</p>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
     data() {
         return {
-            posts:[]
+            // posts:[],
+            borrowers:[]
         }
     },
     sockets:{
-        fetchPosts(data) {
-            this.posts = data
+        // fetchPosts(data) {
+        //     this.posts = data
+        // },
+        fetchBorrowers(data) {
+            this.borrowers = data
         }
     },
     mounted() {
-        this.fetchPosts()
+        // this.fetchPosts()
     },
     methods:{
-        fetchPosts() {
-            axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(response => {
-                this.$socket.emit('fetchPosts', response.data)
-            })
-            .catch(err => console.log(err))
-        }
+        // fetchPosts() {
+        //     axios.get('https://jsonplaceholder.typicode.com/posts')
+        //     .then(response => {
+        //         this.$socket.emit('fetchPosts', response.data)
+        //     })
+        //     .catch(err => console.log(err))
+        // }
     }
 }
 </script>
