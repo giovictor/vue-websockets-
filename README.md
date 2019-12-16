@@ -1,4 +1,6 @@
-# vue-websockets
+# Vue Websockets
+
+A sample Vue.js and Node.js websocket client and server fetching data from JSONPlaceHolder.
 
 ## Project setup
 ```
