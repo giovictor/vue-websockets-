@@ -1,12 +1,40 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div>
+        <h1>Posts</h1>
+        <div v-for="post in posts" :key="post.id">
+            <h3>{{post.title}}</h3>
+            <p>{{post.body}}</p>
+        </div>
     </div>
-    <router-view/>
-  </div>
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            posts:[]
+        }
+    },
+    sockets:{
+        fetchPosts(data) {
+            this.posts = data
+        }
+    },
+    mounted() {
+        this.fetchPosts()
+    },
+    methods:{
+        fetchPosts() {
+            axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                this.$socket.emit('fetchPosts', response.data)
+            })
+            .catch(err => console.log(err))
+        }
+    }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -15,18 +43,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
