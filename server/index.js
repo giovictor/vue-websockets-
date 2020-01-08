@@ -8,4 +8,12 @@ io.on('connection', (socket) => {
     socket.on('fetchPosts', (data) => {
         io.sockets.emit('fetchPosts', data)
     })
+
+    socket.on('sendMessage', (data) => {
+        io.sockets.emit('sendMessage', data)
+    })
+
+    socket.on('typingMessage', (data) => {
+        socket.broadcast.emit('typingMessage', data)
+    })
 })

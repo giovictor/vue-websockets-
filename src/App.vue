@@ -1,36 +1,57 @@
 <template>
-    <div>
-        <h1>Posts</h1>
-        <div v-for="post in posts" :key="post.id">
-            <h3>{{post.title}}</h3>
-            <p>{{post.body}}</p>
+    <div class="mx-auto flex flex-col">
+        <div class="mx-12">
+            <h3>Chat</h3>
+            <div class="bg-gray-300 w-full px-8 py-8" style="height:700px;">
+                <div v-for="chat in chats" :key="chat.message">{{chat.username}}: {{chat.message}}</div>
+            </div>
+        </div>
+        <div class="mx-12">
+            <div class="mb-2">
+                <label class="block">Username: </label>
+                <input class="shadow appearance-none border" type="text" v-model="username">
+            </div>
+            <div class="mb-2">
+                <label class="block">Message: </label>
+                <input class="shadow appearance-none border" type="text" v-model="message" @keyup="typingMessage">
+            </div>
+            <button @click="sendMessage" class="mt-2 bg-green-500 px-5 text-white rounded-lg">Send</button>
+            {{typing}}
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
     data() {
         return {
-            posts:[]
+            posts:[],
+            message:'',
+            chats:[],
+            typing:'',
+            username:''
         }
     },
     sockets:{
-        fetchPosts(data) {
-            this.posts = data
+        sendMessage(data) {
+            this.chats.push(data)
+            this.typing = ''
+        },
+        typingMessage(data) {
+            this.typing = data
         }
     },
     mounted() {
-        this.fetchPosts()
     },
     methods:{
-        fetchPosts() {
-            axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(response => {
-                this.$socket.emit('fetchPosts', response.data)
-            })
-            .catch(err => console.log(err))
+        sendMessage() {
+            this.$socket.emit('sendMessage', {username:this.username, message:this.message})
+            this.message = ''
+            this.typing = ''
+        },
+        typingMessage() {
+            this.$socket.emit('typingMessage', `${this.username} is typing...`)
+            this.typing = ''
         }
     }
 }
