@@ -2,6 +2,11 @@
 
 A sample Vue.js and Node.js websocket client and server fetching data from JSONPlaceHolder.
 
+## Clone repository
+```
+git clone https://github.com/giovictor/vue-websockets-.git
+```
+
 ## Project setup
 ```
 npm install
@@ -13,19 +18,9 @@ cd server
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Start server and client for the project
 ```
-npm run serve
+// If inside server folder make sure to enter command 'cd ..'
+npm run dev
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
 
