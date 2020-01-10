@@ -1,7 +1,7 @@
 <template>
     <div class="mx-auto flex flex-col">
         <div class="mx-12">
-            <h3>Chat</h3>
+            <h3>Chats</h3>
             <div class="bg-gray-300 w-full px-8 py-8" style="height:700px;">
                 <div v-for="chat in chats" :key="chat.message">{{chat.username}}: {{chat.message}}</div>
             </div>
