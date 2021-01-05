@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run serve\" \"npm run server\""
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "concurrently": "^5.0.2",
     "core-js": "^3.4.3",
     "socket.io-client": "^2.3.0",
